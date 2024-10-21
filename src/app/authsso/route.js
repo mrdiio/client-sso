@@ -10,11 +10,7 @@ export async function GET(req) {
     jwt.verify(token, publicKey)
 
     const cookieStore = cookies()
-    cookieStore.set('UNTAN_ACCESS', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-    })
+    cookieStore.set('UNTAN_ACCESS', token)
     return NextResponse.redirect('http://localhost:3002/todos')
   } catch (error) {
     return NextResponse.redirect('http://localhost:3002')

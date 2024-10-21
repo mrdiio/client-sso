@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import isValidJWT, { publicKey } from './lib/auth/isValidJWT'
+import Cookies from 'js-cookie'
+import { getSession } from './lib/auth'
 
 // Atur route yang dilindungi
 const protectedRoutes = ['/todos', '/profile']

@@ -3,28 +3,15 @@ import { getProfileService } from '@/services/profile.service'
 import { useQuery } from '@tanstack/react-query'
 
 export default function Profile() {
-  // get stored cookie
-  const token = ''
-
-  
-
-  const { data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['profile'],
-    queryFn: () =>
-      fetch('http://localhost:3000/auth/profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer `,
-        },
-      }).then((res) => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok')
-        }
-
-        return res.json()
-      }),
+    queryFn: () => getProfileService(),
+    retry: 1,
   })
+
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
 
   return (
     <div>

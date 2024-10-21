@@ -36,3 +36,7 @@ export default async function isValidJWT(token) {
     throw error
   }
 }
+
+export function getSession(token) {
+  return jwtDecode(token.value)
+}
